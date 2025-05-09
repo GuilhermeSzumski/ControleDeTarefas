@@ -5,25 +5,65 @@ const rl = readline.createInterface({
     output: process.stdout
 });
 
+let item = []
+
+function criar() {
+    rl.question('Digite o que deseja cadastrar: ', (entrada) =>{
+        item.push({id: item.length + 1, nomeItem: entrada});
+        console.log(item);
+        menu();
+    })
+}
+
+function listar() {
+    item.forEach((index) => {
+        console.log(`--------------------------------\nID: ${index.id}\nItem: ${index.nomeItem}`);
+    });
+    console.log('--------------------------------')
+}
+
+function editar() {
+    listar();
+    rl.question('Digite qual item você deseja alterar: ', (entradaId) => {
+        let idEditar = parseInt(entradaId)
+        rl.question('Digite a alteração: ', (entradaNome) => {
+            item[idEditar - 1] = {id: entradaId, nomeItem: entradaNome};
+            console.log(item);
+            menu();
+        })
+    });
+}
+
 function menu() {
     console.log(`
         Teste
-        1. eu falo oq tu é.
-        2. Sair.
+        1. Criar
+        2. Listar
+        3. Editar
+        4. Deletar
+        5. Sair
         `);
-        rl.question('Digite o número da opção', (entrada) => {
+        rl.question('Opção: ', (entrada) => {
             switch (entrada) {
                 case '1':
-                    console.log('Você é lindo maravilhoso!');
-                    menu();
+                    criar();
                     break;
                 case '2':
-                    console.log('Viado gay.');
+                    listar();
+                    menu();
+                    break;
+                case '3':
+                    editar();
+                    break;
+                case '4':
+                    menu();
+                    break;
+                case '5':
                     rl.close();
                     break;
                 default:
                     console.log('Valor incorreto.');
-                    menu();
+                    rl.close();
                     break;
             }
         });
