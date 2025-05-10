@@ -24,14 +24,25 @@ function listar() {
 
 function editar() {
     listar();
-    rl.question('Digite qual item você deseja alterar: ', (entradaId) => {
-        let idEditar = parseInt(entradaId)
-        rl.question('Digite a alteração: ', (entradaNome) => {
-            item[idEditar - 1] = {id: entradaId, nomeItem: entradaNome};
+    rl.question('Selecione qual item você deseja alterar: ', (entrada) => {
+        let idEditar = parseInt(entrada);
+        rl.question('Digite a alteração: ', (novoNome) => {
+            item[idEditar - 1] = {id: entrada, nomeItem: novoNome};
             console.log(item);
             menu();
         })
     });
+}
+
+function deletar() {
+    listar();
+    rl.question('Selecione qual item deseja deletar: ', (entrada) => {
+        let idDeletar = parseInt(entrada);
+        console.log(idDeletar);
+        item.splice(idDeletar - 1, 1);
+        console.log(item);
+        menu();
+    })
 }
 
 function menu() {
@@ -47,6 +58,7 @@ function menu() {
             switch (entrada) {
                 case '1':
                     criar();
+                    menu();
                     break;
                 case '2':
                     listar();
@@ -56,7 +68,7 @@ function menu() {
                     editar();
                     break;
                 case '4':
-                    menu();
+                    deletar();
                     break;
                 case '5':
                     rl.close();
