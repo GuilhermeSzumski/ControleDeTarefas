@@ -5,30 +5,45 @@ const rl = readline.createInterface({
     output: process.stdout
 });
 
-let item = []
+let tarefa = []
 
 function criar() {
-    rl.question('Digite o que deseja cadastrar: ', (entrada) =>{
-        item.push({id: item.length + 1, nomeItem: entrada});
-        console.log(item);
-        menu();
-    })
-}
+    rl.question('Digite o nome da tarefa: ', (nome) =>{
+        rl.question('Digite a descrição da tarefa: ', (descricao) => {
+            rl.question('Digite o prazo de entrega ano, mês e dia respectivamente: ', (prazo) => {
+                tarefa.push({
+                    id: tarefa.length + 1,
+                    nomeTarefa: nome,
+                    descricaoTarefa: descricao,
+                    prazoTarefa: prazo
+                });
+                console.log(tarefa);
+                menu();
+            });
+        });
+    });
+};
 
 function listar() {
-    item.forEach((index) => {
-        console.log(`--------------------------------\nID: ${index.id}\nItem: ${index.nomeItem}`);
+    tarefa.forEach((index) => {
+        console.log(`
+            --------------------------------\n
+            ID: ${index.id}\n
+            tarefa: ${index.nomeTarefa}\n
+            descrição: ${index.descricaoTarefa}\n
+            prazo: ${index.prazo}
+            `);
     });
-    console.log('--------------------------------')
+    console.log('           --------------------------------')
 }
 
 function editar() {
     listar();
-    rl.question('Selecione qual item você deseja alterar: ', (entrada) => {
+    rl.question('Selecione qual tarefa você deseja alterar: ', (entrada) => {
         let idEditar = parseInt(entrada);
         rl.question('Digite a alteração: ', (novoNome) => {
-            item[idEditar - 1] = {id: entrada, nomeItem: novoNome};
-            console.log(item);
+            tarefa[idEditar - 1] = {id: entrada, nomeTarefa: novoNome};
+            console.log(tarefa);
             menu();
         })
     });
@@ -36,11 +51,11 @@ function editar() {
 
 function deletar() {
     listar();
-    rl.question('Selecione qual item deseja deletar: ', (entrada) => {
+    rl.question('Selecione qual tarefa deseja deletar: ', (entrada) => {
         let idDeletar = parseInt(entrada);
         console.log(idDeletar);
-        item.splice(idDeletar - 1, 1);
-        console.log(item);
+        tarefa.splice(idDeletar - 1, 1);
+        console.log(tarefa);
         menu();
     })
 }
@@ -80,7 +95,5 @@ function menu() {
             }
         });
 }
-
-
 
 menu();
