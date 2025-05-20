@@ -1,13 +1,27 @@
 const readline = require('readline');
+const fs = require('fs');
 
 const rl = readline.createInterface({
     input: process.stdin,
     output: process.stdout
 });
 
-let tarefa = []
+let tarefa = [];
+
+function lerTarefas() {
+    fs.readFileSync('tarefas.json', (err, data) => {
+        if(!err) {
+            tarefa = JSON.parse(data);
+        }
+    });    
+};
+
+function salvarTarefa(tarefa) {
+    fs.writeFileSync('tarefas.json', JSON.stringify(tarefa, null, 2));
+};
 
 function criar() {
+    lerTarefas();
     rl.question('Digite o nome da tarefa: ', (nome) =>{
         rl.question('Digite a descrição da tarefa: ', (descricao) => {
             rl.question('Digite o prazo de entrega ano, mês e dia respectivamente: ', (prazo) => {
@@ -18,6 +32,7 @@ function criar() {
                     prazoTarefa: prazo
                 });
                 console.log(tarefa);
+                salvarTarefa(tarefa);
                 menu();
             });
         });
@@ -25,6 +40,8 @@ function criar() {
 };
 
 function listar() {
+    lerTarefas();
+    console.log(tarefa)
     tarefa.forEach((index) => {
         console.log(`
             --------------------------------\n
@@ -73,7 +90,6 @@ function menu() {
             switch (entrada) {
                 case '1':
                     criar();
-                    menu();
                     break;
                 case '2':
                     listar();
