@@ -34,7 +34,7 @@ function criar() {
     
     //adiciona os novos dados dentro da array de tarefas
     tarefa.push({
-        id: tarefa.length + 1,
+        //id: tarefa.length + 1,
         nomeTarefa: nome,
         descricaoTarefa: descricao,
         prazoTarefa: prazo
@@ -50,10 +50,10 @@ function listar() {
     lerTarefas();       //Chama a função ler tarefas para receber a array das tarefas
 
     //busca os dados da array e lista cada campo de forma individual e organizado
-    tarefa.forEach((index) => {
+    tarefa.forEach((index, id) => {
         console.log(`
             --------------------------------
-            ID: ${index.id}
+            ID: ${id + 1}
             tarefa: ${index.nomeTarefa}
             descrição: ${index.descricaoTarefa}
             prazo: ${index.prazoTarefa}
@@ -77,7 +77,7 @@ function editar() {
 
     //Adiciona os valores editados à tarefa específica
     tarefa[idEditar - 1] = {
-        id: opcao,
+        //id: opcao,
         nomeTarefa: novoNome,
         descricaoTarefa: novaDescricao,
         prazoTarefa: novoPrazo

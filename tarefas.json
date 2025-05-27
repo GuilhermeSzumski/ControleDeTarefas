@@ -1,26 +1,12 @@
 [
   {
-    "id": 1,
-    "nomeTarefa": "limpar casa",
-    "descricaoTarefa": "limpar chao, louca e cama",
-    "prazoTarefa": "20250521"
-  },
-  {
-    "id": 2,
     "nomeTarefa": "qwe",
     "descricaoTarefa": "qwe",
     "prazoTarefa": "123"
   },
   {
-    "id": 4,
     "nomeTarefa": "q",
     "descricaoTarefa": "q",
     "prazoTarefa": "1"
-  },
-  {
-    "id": 4,
-    "nomeTarefa": "e",
-    "descricaoTarefa": "e",
-    "prazoTarefa": "3"
   }
 ]
