@@ -1,13 +1,7 @@
-const readline = require('readline');
 const prompt = require('prompt-sync')();
 const fs = require('fs');
 const { exit } = require('process');
 const tarefasArquivo = './tarefas.json';
-
-const rl = readline.createInterface({
-    input: process.stdin,
-    output: process.stdout
-});
 
 //Variável tarefa sendo declarada
 let tarefa = [];
