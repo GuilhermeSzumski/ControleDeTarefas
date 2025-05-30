@@ -41,6 +41,8 @@ function criar() {
     });
 
     salvarTarefa(tarefa);   //Chama a função salvarTarefas com a variável tarefas atualizada (sobrescreve a array antiga com a atualizada)
+    console.log('Tarefa criada com sucesso!');
+    espacamento();  //Chama a função de espaçamento para deixar o terminal mais limpo
     menu();     //Retorna ao menu
 
 };
@@ -48,18 +50,17 @@ function criar() {
 //Função de listar tarefas
 function listar() {
     lerTarefas();       //Chama a função ler tarefas para receber a array das tarefas
+    espacamento();  //Chama a função de espaçamento para deixar o terminal mais limpo
 
     //busca os dados da array e lista cada campo de forma individual e organizado
     tarefa.forEach((index, id) => {
-        console.log(`
-            --------------------------------
+        console.log(`           ==================================
             ID: ${id + 1}
             tarefa: ${index.nomeTarefa}
             descrição: ${index.descricaoTarefa}
-            prazo: ${index.prazoTarefa}
-            `);
+            prazo: ${index.prazoTarefa}`);
     });
-    console.log('           --------------------------------')
+    console.log('           ==================================');
 }
 
 //Função de editar uma tarefa específica
@@ -84,6 +85,8 @@ function editar() {
     };
 
     salvarTarefa(tarefa);   //Salva os dados atualizados
+    espacamento();  //Chama a função de espaçamento para deixar o terminal mais limpo
+    console.log('Tarefa editada com sucesso!');
     menu();     //Retorna ao menu
 }
 
@@ -95,18 +98,28 @@ function deletar() {
     let idDeletar = parseInt(opcao);    //Converte o valor em string para inteiro
     tarefa.splice(idDeletar - 1, 1);    //Remove o tarefa selecionada
     salvarTarefa(tarefa);   //salva as tarefas atualizadas sem a tarefa deletada
+    espacamento();  //Chama a função de espaçamento para deixar o terminal mais limpo
+    console.log('Tarefa deletada com sucesso!');
     menu();     //retorna ao menu
-}
+};
+
+function espacamento() {
+    for (let index = 0; index < 20; index++) {
+        console.log('\n');
+    };
+};
 
 //Função que abre uma tela de menu
 function menu() {
     console.log(`
-        Teste
+        ========== Gerenciar Tarefas ==========
+        Escolha uma opção:
         1. Criar
         2. Listar
         3. Editar
         4. Deletar
         5. Sair
+        =======================================
         `);
         let opcao = prompt('Opção: ');
 
@@ -139,4 +152,5 @@ function menu() {
         }
 }
 
+espacamento();  //Chama a função de espaçamento para deixar o terminal mais limpo
 menu();     //chama a função menu
