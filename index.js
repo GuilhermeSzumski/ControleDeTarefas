@@ -27,12 +27,16 @@ function criar() {
     let prazo = prompt('Digite o prazo de entrega ano, mês e dia respectivamente: ');
     
     //adiciona os novos dados dentro da array de tarefas
-    tarefa.push({
-        //id: tarefa.length + 1,
-        nomeTarefa: nome,
-        descricaoTarefa: descricao,
-        prazoTarefa: prazo
-    });
+    if (prazo.length == 8) {
+        tarefa.push({
+            nomeTarefa: nome,
+            descricaoTarefa: descricao,
+            prazoTarefa: prazo
+        });
+    } else {
+        console.log('O prazo deve ser informado no formato AAAA-MM-DD');2
+        menu();
+    }
 
     salvarTarefa(tarefa);   //Chama a função salvarTarefas com a variável tarefas atualizada (sobrescreve a array antiga com a atualizada)
     console.log('Tarefa criada com sucesso!');
@@ -48,6 +52,7 @@ function listar() {
 
     //busca os dados da array e lista cada campo de forma individual e organizado
     tarefa.forEach((index, id) => {
+        index.prazoTarefa = index.prazoTarefa.replace(/(\d{4})(\d{2})(\d{2})/, '$1-$2-$3'); // Formata o prazo para AAAA-MM-DD
         console.log(`           ==================================
             ID: ${id + 1}
             tarefa: ${index.nomeTarefa}
